@@ -16,5 +16,14 @@ public class TapController : MonoBehaviour
     // Rotation
     Quaternion downRotation;
     Quaternion forwardRotation;
-    
+
+    void Start()
+    {
+        // Access the Rigidbody2D component of the object
+        rigidbody = GetComponent<Rigidbody2D>();
+
+        // For rotation
+        downRotation = Quaternion.Euler(0, 0, -90);
+        forwardRotation = Quaternion.Euler(0, 0, 35);
+    }
 }
