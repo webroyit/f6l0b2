@@ -64,4 +64,21 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    public void ConfirmGameOver()
+    {
+        OnGameOverConfirmed();
+
+        // Reset the score
+        scoreText.text = "0";
+
+        // Go back to start page
+        SetPageState(PageState.Start);
+    }
+
+    public void StartGame()
+    {
+        // Start the count down
+        SetPageState(PageState.Countdown);
+    }
 }
