@@ -36,6 +36,25 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    void OnEnable()
+    {
+        CountdownText.OnCountdownFinished += OnCountdownFinished;
+    }
+
+    void OnDisable()
+    {
+        CountdownText.OnCountdownFinished -= OnCountdownFinished;
+    }
+
+    // Start the game
+    void OnCountdownFinished()
+    {
+        SetPageState(PageState.None);
+        OnGameStarted();
+        score = 0;
+        gameOver = false;
+    }
+
     // Show target page
     void SetPageState(PageState state)
     {
