@@ -26,4 +26,20 @@ public class TapController : MonoBehaviour
         downRotation = Quaternion.Euler(0, 0, -90);
         forwardRotation = Quaternion.Euler(0, 0, 35);
     }
+
+    void Update()
+    {
+        // Left click of the mouse or tap
+        if(Input.GetMouseButtonDown(0))
+        {
+            // Forward Rotation
+            transform.rotation = forwardRotation;
+
+            // Push the bird up
+            rigidbody.AddForce(Vector2.up * tapForce, ForceMode2D.Force);
+        }
+
+        // Lerp is from source value to a target for certain amount of time
+        transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);
+    }
 }
