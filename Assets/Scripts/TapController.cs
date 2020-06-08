@@ -42,4 +42,18 @@ public class TapController : MonoBehaviour
         // Lerp is from source value to a target for certain amount of time
         transform.rotation = Quaternion.Lerp(transform.rotation, downRotation, tiltSmooth * Time.deltaTime);
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.tag == "ScoreZone")
+        {
+            
+        }
+
+        if(col.gameObject.tag == "DeadZone")
+        {
+            // Stop the bird 
+            rigidbody.simulated = false;
+        }
+    }
 }
