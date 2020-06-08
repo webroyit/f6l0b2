@@ -35,6 +35,9 @@ public class TapController : MonoBehaviour
             // Forward Rotation
             transform.rotation = forwardRotation;
 
+            // Disable gravity when clicking or tapping
+            rigidbody.velocity = Vector3.zero;
+
             // Push the bird up
             rigidbody.AddForce(Vector2.up * tapForce, ForceMode2D.Force);
         }
