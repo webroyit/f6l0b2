@@ -5,6 +5,13 @@ using UnityEngine.UI;       // For text
 
 public class GameManager : MonoBehaviour
 {
+    // Create events for other scripts to be used
+    public delegate void GameDelegate();
+    public static event GameDelegate OnGameStarted;
+    public static event GameDelegate OnGameOverConfirmed;
+
+    public static GameManager Instance;
+
     public GameObject startPage;
     public GameObject gameOverPage;
     public GameObject countdownPage;
@@ -23,4 +30,38 @@ public class GameManager : MonoBehaviour
 
     // To prevent other script from changing this value
     public bool GameOver { get { return gameOver; }}
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    // Show target page
+    void SetPageState(PageState state)
+    {
+        switch(state)
+        {
+            case PageState.None:
+                startPage.SetActive(false);
+                gameOverPage.SetActive(false);
+                countdownPage.SetActive(false);
+                break;
+            case PageState.Start:
+                startPage.SetActive(true);
+                gameOverPage.SetActive(false);
+                countdownPage.SetActive(false);
+                break;
+            case PageState.GameOver:
+                startPage.SetActive(false);
+                gameOverPage.SetActive(true);
+                countdownPage.SetActive(false);
+                break;
+            case PageState.Countdown:
+                startPage.SetActive(false);
+                gameOverPage.SetActive(false);
+                countdownPage.SetActive(true);
+                break;
+
+        }
+    }
 }
