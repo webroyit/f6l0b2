@@ -39,11 +39,15 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         CountdownText.OnCountdownFinished += OnCountdownFinished;
+        TapController.OnPlayerDied += OnPlayerDied;
+        TapController.OnPlayerScored += OnGameStarted;
     }
 
     void OnDisable()
     {
         CountdownText.OnCountdownFinished -= OnCountdownFinished;
+        TapController.OnPlayerDied -= OnPlayerDied;
+        TapController.OnPlayerScored -= OnGameStarted;
     }
 
     // Start the game
@@ -53,6 +57,16 @@ public class GameManager : MonoBehaviour
         OnGameStarted();
         score = 0;
         gameOver = false;
+    }
+
+    void OnPlayerDied()
+    {
+        gameOver = true;
+    }
+
+    void OnPlayerScored()
+    {
+        score += 1;
     }
 
     // Show target page

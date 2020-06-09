@@ -7,6 +7,11 @@ using UnityEngine;
 
 public class TapController : MonoBehaviour
 {
+    // Create events for other scripts to be used
+    public delegate void PlayerDelegate();
+    public static event PlayerDelegate OnPlayerDied;
+    public static event PlayerDelegate OnPlayerScored;
+
     public float tapForce = 10;
     public float tiltSmooth = 5;
     public Vector3 startPos;
@@ -50,13 +55,15 @@ public class TapController : MonoBehaviour
     {
         if(col.gameObject.tag == "ScoreZone")
         {
-            
+            OnPlayerScored();
         }
 
         if(col.gameObject.tag == "DeadZone")
         {
             // Stop the bird 
             rigidbody.simulated = false;
+
+            OnPlayerDied();
         }
     }
 }
