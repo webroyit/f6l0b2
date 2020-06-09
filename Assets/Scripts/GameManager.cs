@@ -40,14 +40,14 @@ public class GameManager : MonoBehaviour
     {
         CountdownText.OnCountdownFinished += OnCountdownFinished;
         TapController.OnPlayerDied += OnPlayerDied;
-        TapController.OnPlayerScored += OnGameStarted;
+        TapController.OnPlayerScored += OnPlayerScored;
     }
 
     void OnDisable()
     {
         CountdownText.OnCountdownFinished -= OnCountdownFinished;
         TapController.OnPlayerDied -= OnPlayerDied;
-        TapController.OnPlayerScored -= OnGameStarted;
+        TapController.OnPlayerScored -= OnPlayerScored;
     }
 
     // Start the game
@@ -62,11 +62,23 @@ public class GameManager : MonoBehaviour
     void OnPlayerDied()
     {
         gameOver = true;
+
+        // Get the high score from local device
+        int savedScore = PlayerPrefs.GetInt("HighScore");
+
+        if(score > savedScore)
+        {
+            // New High Score
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+
+        SetPageState(PageState.GameOver);
     }
 
     void OnPlayerScored()
     {
         score += 1;
+        scoreText.text = score.ToString();
     }
 
     // Show target page
@@ -100,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void ConfirmGameOver()
     {
-        OnGameOverConfirmed();
+        //OnGameOverConfirmed();
 
         // Reset the score
         scoreText.text = "0";
