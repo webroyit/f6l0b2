@@ -15,4 +15,14 @@ public class Parallaxer : MonoBehaviour
 
         public void Dispose() { inUse = false; }
     }
+
+    public GameObject Prefab;           // Type of prefab
+    public int poolSize;
+    public float shiftSpeed;
+    public float spawnRate;
+
+    public Vector3 defaultSpawnPos;
+    public bool spawnImmediate;
+    public Vector3 immediateSpawnPos;
+    public Vector2 targetAspect;         // Check for screen ratios
 }
