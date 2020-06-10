@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void ConfirmGameOver()
     {
-        //OnGameOverConfirmed();
+        OnGameOverConfirmed();
 
         // Reset the score
         scoreText.text = "0";

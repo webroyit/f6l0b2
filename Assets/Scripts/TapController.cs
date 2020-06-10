@@ -32,6 +32,33 @@ public class TapController : MonoBehaviour
         forwardRotation = Quaternion.Euler(0, 0, 35);
     }
 
+    void OnEnable()
+    {
+        GameManager.OnGameStarted += OnGameStarted;
+        GameManager.OnGameOverConfirmed += OnGameOverConfirmed;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameStarted -= OnGameStarted;
+        GameManager.OnGameOverConfirmed -= OnGameOverConfirmed;
+    }
+
+    void OnGameStarted()
+    {
+        rigidbody.velocity = Vector3.zero;
+
+        // Let the object move
+        rigidbody.simulated = true;
+    }
+
+    void OnGameOverConfirmed()
+    {
+        // Move the game objects back to its original position
+        transform.localPosition = startPos;
+        transform.rotation = Quaternion.identity;
+    }
+
     void Update()
     {
         // Left click of the mouse or tap
