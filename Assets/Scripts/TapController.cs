@@ -22,6 +22,8 @@ public class TapController : MonoBehaviour
     Quaternion downRotation;
     Quaternion forwardRotation;
 
+    GameManager game;
+
     void Start()
     {
         // Access the Rigidbody2D component of the object
@@ -30,6 +32,8 @@ public class TapController : MonoBehaviour
         // For rotation
         downRotation = Quaternion.Euler(0, 0, -90);
         forwardRotation = Quaternion.Euler(0, 0, 35);
+
+        game = GameManager.Instance;
     }
 
     void OnEnable()
@@ -61,6 +65,9 @@ public class TapController : MonoBehaviour
 
     void Update()
     {
+        // Stop the bird from tilting
+        if(game.GameOver) return;
+
         // Left click of the mouse or tap
         if(Input.GetMouseButtonDown(0))
         {
