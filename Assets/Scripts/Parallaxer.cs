@@ -64,7 +64,21 @@ public class Parallaxer : MonoBehaviour
 
     void OnGameOverConfirmed()
     {
+        
+    }
 
+    void Update()
+    {
+        if(game.GameOver) return;
+
+        Shift();
+        spawnTimer += Time.deltaTime;
+
+        if(spawnTimer > spawnRate)
+        {
+            Spawn();
+            spawnTimer = 0;
+        }
     }
 
     
