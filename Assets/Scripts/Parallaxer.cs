@@ -91,6 +91,40 @@ public class Parallaxer : MonoBehaviour
             // Instantiate the value within the pool object
             poolObjects[i] = new PoolObject(t);
         }
+
+        if(spawnImmediate)
+        {
+            SpawnImmediate();
+        }
+    }
+
+    void Spawn()
+    {
+        Transform t = GetPoolObject();
+
+        if(t == null) return;
+
+        // Where to place the pool object
+        Vector3 pos = Vector3.zero;
+        pos.x = defaultSpawnPos.x;
+        pos.y = Random.Range(ySpawnRange.min, ySpawnRange.max);
+        t.position = pos;
+    }
+
+    // Spawn the pool object immediate to prevent gap between between pool objects
+    void SpawnImmediate()
+    {
+        Transform t = GetPoolObject();
+
+        if(t == null) return;
+
+        // Where to place the pool object
+        Vector3 pos = Vector3.zero;
+        pos.x = immediateSpawnPos.x;
+        pos.y = Random.Range(ySpawnRange.min, ySpawnRange.max);
+        t.position = pos;
+
+        Spawn();
     }
 
     // Move the pool object to the right
