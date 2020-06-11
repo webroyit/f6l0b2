@@ -64,12 +64,33 @@ public class Parallaxer : MonoBehaviour
 
     void OnGameOverConfirmed()
     {
-        Configure();
+
     }
 
+    
+    // Spawn pool objects
     void Configure()
     {
+        // Adjust the pool object to screen size
+        targetAspect = targetAspectRatio.x / targetAspectRatio.y;
 
+        poolObjects = new PoolObject[poolSize];
+
+        for(int i = 0; i < poolObjects.Length; i++)
+        {
+            // Create the game object
+            GameObject go = Instantiate(Prefab) as GameObject;
+
+            Transform t = go.transform;
+
+            t.SetParent(transform);
+
+            // Place the pool object on the left side of the off screen;
+            t.position = Vector3.one * 1000;
+
+            // Instantiate the value within the pool object
+            poolObjects[i] = new PoolObject(t);
+        }
     }
 
     // Move the pool object to the right
