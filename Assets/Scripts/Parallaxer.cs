@@ -72,6 +72,18 @@ public class Parallaxer : MonoBehaviour
 
     }
 
+    void CheckDisposeObject(PoolObject poolObject)
+    {
+        // - for negative direction or off screen
+        if(poolObject.transform.position.x < -defaultSpawnPos.x)
+        {
+            poolObject.Dispose();
+
+            // Move the pool object off the screen
+            poolObject.transform.postiion = Vector3.one * 1000;
+        }
+    }
+
     // Get the available pool object
     Transform GetPoolObject()
     {
