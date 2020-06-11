@@ -72,6 +72,16 @@ public class Parallaxer : MonoBehaviour
 
     }
 
+    // Move the pool object to the right
+    void Shift()
+    {
+        for(int i = 0; i < poolObjects.Length; i++)
+        {
+            poolObjects[i].transform.position += -Vector3.right * shiftSpeed * Time.deltaTime;
+            CheckDisposeObject(poolObjects[i]);
+        }
+    }
+
     void CheckDisposeObject(PoolObject poolObject)
     {
         // - for negative direction or off screen
@@ -80,7 +90,7 @@ public class Parallaxer : MonoBehaviour
             poolObject.Dispose();
 
             // Move the pool object off the screen
-            poolObject.transform.postiion = Vector3.one * 1000;
+            poolObject.transform.position = Vector3.one * 1000;
         }
     }
 
