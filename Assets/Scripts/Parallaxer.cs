@@ -46,6 +46,11 @@ public class Parallaxer : MonoBehaviour
         Configure();
     }
 
+    void Start()
+    {
+        game = GameManager.Instance;
+    }
+
     // Subscribe these event
     void OnEnable()
     {
@@ -57,14 +62,18 @@ public class Parallaxer : MonoBehaviour
         GameManager.OnGameOverConfirmed -= OnGameOverConfirmed;
     }
 
-    void Start()
-    {
-        game = GameManager.Instance;
-    }
-
     void OnGameOverConfirmed()
     {
-        
+        for(int i = 0; i < poolObjects.Length; i++)
+        {
+            poolObjects[i].Dispose();
+            poolObjects[i].transform.position = Vector3.one * 1000;
+        }
+
+        if(spawnImmediate)
+        {
+            SpawnImmediate();
+        }
     }
 
     void Update()
