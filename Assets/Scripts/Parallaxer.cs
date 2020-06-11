@@ -71,4 +71,22 @@ public class Parallaxer : MonoBehaviour
     {
 
     }
+
+    // Get the available pool object
+    Transform GetPoolObject()
+    {
+        // Get the first available pool object
+        for(int i = 0; i < poolObjects.Length; i++)
+        {
+            if(!poolObjects[i].inUse)
+            {
+                // Make sure to not use pool object when it goes off the screen
+                poolObjects[i].Use();
+
+                return poolObjects[i].transform;
+            }
+        }
+
+        return null;
+    }
 }
