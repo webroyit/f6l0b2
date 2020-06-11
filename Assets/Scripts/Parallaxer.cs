@@ -29,7 +29,7 @@ public class Parallaxer : MonoBehaviour
     public float shiftSpeed;
     public float spawnRate;
 
-    public YSpawnRange YSpawnRange;
+    public YSpawnRange ySpawnRange;
     public Vector3 defaultSpawnPos;
     public bool spawnImmediate;
     public Vector3 immediateSpawnPos;
@@ -40,4 +40,35 @@ public class Parallaxer : MonoBehaviour
 
     PoolObject[] poolObjects;
     GameManager game;                // Refer to the game manager
+
+    void Awake()
+    {
+        Configure();
+    }
+
+    // Subscribe these event
+    void OnEnable()
+    {
+        GameManager.OnGameOverConfirmed += OnGameOverConfirmed;
+    }
+
+    void OnDisable()
+    {
+        GameManager.OnGameOverConfirmed -= OnGameOverConfirmed;
+    }
+
+    void Start()
+    {
+        game = GameManager.Instance;
+    }
+
+    void OnGameOverConfirmed()
+    {
+        Configure();
+    }
+
+    void Configure()
+    {
+
+    }
 }
