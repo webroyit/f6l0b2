@@ -14,6 +14,6 @@ public class HighscoreText : MonoBehaviour
         highscore = GetComponent<Text>();
 
         // Get the highscore from local device
-        highscore.text = PlayerPrefs.GetInt("HighScore").ToString();
+        highscore.text = "High Score: " + PlayerPrefs.GetInt("HighScore").ToString();
     }
 }
