@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     }
 
     int score = 0;
-    bool gameOver = false;
+    bool gameOver = true;
 
     // To prevent other script from changing this value
     public bool GameOver { get { return gameOver; }}
