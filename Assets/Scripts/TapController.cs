@@ -16,6 +16,10 @@ public class TapController : MonoBehaviour
     public float tiltSmooth = 5;
     public Vector3 startPos;
 
+    // Drag and drop the sounds to this variable
+    public AudioSource tapAudio;
+    public AudioSource deathAudio;
+
     Rigidbody2D rigidbody;
 
     // Rotation
@@ -73,6 +77,9 @@ public class TapController : MonoBehaviour
         // Left click of the mouse or tap
         if(Input.GetMouseButtonDown(0))
         {
+            // Play the sound
+            tapAudio.Play();
+
             // Forward Rotation
             transform.rotation = forwardRotation;
 
@@ -100,6 +107,8 @@ public class TapController : MonoBehaviour
             rigidbody.simulated = false;
 
             OnPlayerDied();
+
+            deathAudio.Play();
         }
     }
 }
