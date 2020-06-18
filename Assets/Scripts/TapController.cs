@@ -18,6 +18,7 @@ public class TapController : MonoBehaviour
 
     // Drag and drop the sounds to this variable
     public AudioSource tapAudio;
+    public AudioSource coinAudio;
     public AudioSource deathAudio;
 
     Rigidbody2D rigidbody;
@@ -99,6 +100,8 @@ public class TapController : MonoBehaviour
         if(col.gameObject.tag == "ScoreZone")
         {
             OnPlayerScored();
+
+            coinAudio.Play();
         }
 
         if(col.gameObject.tag == "DeadZone")
